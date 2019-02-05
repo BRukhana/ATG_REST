@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+ATG-Module-Uri: demoApp.war
+ATG-Context-Root: demo
+ATG-Module-Version: demoApp.war
+

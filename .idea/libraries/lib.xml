@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/spring-beans-3.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/springtonucleus.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/spring-context-3.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/spring-asm-3.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/spring-web-3.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/spring-expression-3.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/spring-aop-3.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/dspjspTaglib1_0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/spring-core-3.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/jstl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/json-lib-0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/j2ee-apps/demoApp.war/WEB-INF/lib/standard.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

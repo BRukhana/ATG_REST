@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE payload-schemas PUBLIC "-//Art Technology Group, Inc.//Payload Schema Specifier
+Specifier 1.0//EN" "http://www.atg.com/dtds/payloadschema/payloadschema_1.0.dtd">
+<payload-schemas>
+
+	<!--*********************************************************************** -->
+	<!-- The filters defined below should be kept in alphabetical order. -->
+	<!--*********************************************************************** -->
+
+	<!--************************************************* -->
+	<!-- RESPONSE VOs for filterId attribute in service operation -->
+	<!--************************************************* -->
+
+
+<schema include-all-simple="false" id="update-shipping-validator"	treat-container-as-bean="true">
+
+ <bean class="java.util.Map"/>
+    <property name="token_type" writable="false"/>
+    <property name="access_token" writable="false"/>
+
+		</schema>
+
+
+
+
+
+
+  	<schema id="sample-response" writable="false">
+		<bean class="atg.commerce.foo.restresources.CustomPayload" />
+		<property name="errorCode"/>
+		<property name="message"/>
+	</schema>
+
+
+  	<schema id="tracking-info" writable="false">
+		<bean class="com.oms.services.TrackingInfoPayLoad" />
+		<property name="trackingUrl"/>
+		<property name="tackingNo"/>
+	</schema>
+	
+	<schema id="tracking-update" writable="false">
+		  <bean class="org.json.JSONObject"/>
+		<property name="trackNo"/>
+		<property name="trackUrl"/>
+		<property name="updateStatus"/>
+		<property name="errorCode"/>
+		<property name="errorMsg"/>
+	</schema>
+
+  	
+</payload-schemas>

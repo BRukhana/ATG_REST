@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="ATG_LIB">
+    <CLASSES>
+      <root url="file://$USER_HOME$/ATG/ATG11.3/DAS/lib" />
+      <root url="file://$USER_HOME$/ATG/ATG11.3/DCS/lib" />
+      <root url="jar://$PROJECT_DIR$/external-libs/hotswap.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/ATG/ATG11.3/DAS/lib" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/ATG/ATG11.3/DAS/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/ATG/ATG11.3/DCS/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/ATG/ATG11.3/DAS/lib" recursive="false" type="SOURCES" />
+  </library>
+</component>

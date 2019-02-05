@@ -1,0 +1,5 @@
+ATG-Class-Path: lib/ojdbc6.jar lib/classes.jar lib/javax.ws.rs-api-2.0.1.jar lib/osdt_restsec.jar
+ATG-Product: DemoAtgModule
+ATG-Config-Path: config/config.jar
+ATG-Web-Module: j2ee-apps/demoApp.war
+ATG-Required: DAS

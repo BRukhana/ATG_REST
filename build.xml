@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="DemoAtgModule" default="DemoAtgModule">
+	<target name="DemoAtgModule" depends="clean,compile,copyProperties,classjar,jarconfig,copymodule,createear" />
+
+	<!--<target name="test" depends="compile,classjar,jarconfig,copymodule"/> -->
+	<!--<property name="ATGDir" value="C:/ATG/ATG11.1" /> -->
+	
+	<property file="build.properties" />
+	<path id="classpath">
+		<fileset dir="${atg-dynamo.dir}/DAS/lib" includes="**/*.jar" />
+		<fileset dir="${atg-dynamo.dir}/DPS/lib" includes="**/*.jar" />
+		<fileset dir="${atg-dynamo.dir}/DCS/lib" includes="**/*.jar" />
+		<fileset dir="${atg-dynamo.dir}/DSS/lib" includes="**/*.jar" />
+		<fileset dir="${atg-dynamo.dir}/DAF/Search" includes="**/*.jar" />
+		<fileset dir="${atg-dynamo.dir}/CommerceReferenceStore" includes="**/*.jar" />
+		<fileset dir="${atg-dynamo.dir}/DAF/Endeca/Assembler" includes="**/*.jar" />
+		<fileset dir="/u01/app/oracle/product/12.2/db_1/jdbc/" includes="**/*.jar" />
+	</path>
+
+	<target name="clean" description="Delete old build and dist directories">
+		<delete dir="./${lib.dir}" includes="**/classes.jar" />
+		<delete dir="./${config.dir}" includes="**/*.jar" />
+	</target>
+	<target name="compile" description="Compile Java sources">
+		<javac srcdir="./${src.dir}" destdir="./${lib.dir}" classpathref="classpath"   includeantruntime="false" 
+	        debug="true"
+	        verbose="true"
+	        debuglevel="lines,vars,source"
+	        source="1.6"
+	        target="1.6"/>
+		</target>
+	<target name="copyProperties">
+		<copy todir="./${lib.dir}">
+			<fileset dir="./${src.dir}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="classjar" description="Jars building">
+		<jar destfile="./${lib.dir}/classes.jar" basedir="./${lib.dir}">
+		</jar>
+	</target>
+	<target name="jarconfig" description="Jars building">
+		<jar destfile="./${config.dir}/config.jar" basedir="./${config.dir}" />
+	</target>
+	<target name="copymodule" description="copying module to atg">
+		<delete dir="${atg-dynamo.dir}/${module.name}" />
+		<mkdir dir="${atg-dynamo.dir}/${module.name}" />
+		
+		<copy todir="${atg-dynamo.dir}/${module.name}/${lib.dir}">
+			<fileset dir="${workspace.dir}/${module.name}/${lib.dir}" includes="**/*.jar" />
+		</copy>
+		<copy todir="${atg-dynamo.dir}/${module.name}/${config.dir}">
+			<fileset dir="${workspace.dir}/${module.name}/${config.dir}" includes="**/*.jar" />
+		</copy>
+		<copy todir="${atg-dynamo.dir}/${module.name}/${meta-inf.dir}">
+			<fileset dir="${workspace.dir}/${module.name}/${meta-inf.dir}" />
+		</copy>
+		<copy todir="${atg-dynamo.dir}/${module.name}/${j2ee-apps.dir}">
+			<fileset dir="${workspace.dir}/${module.name}/${j2ee-apps.dir}" />
+		</copy>
+		<copy todir="${atg-dynamo.dir}/${module.name}/${src.dir}">
+			<fileset dir="${workspace.dir}/${module.name}/${src.dir}" />
+		</copy>
+		
+	</target>
+	<taskdef name="assemble-jar" classname="atg.appassembly.ant.CreateUnpackedEarTask" classpath="${atg-dynamo.dir}/home/lib/assembler.jar" />
+	<target name="createear">
+		<delete dir="${jboss-server-deployment.dir}/${server-name}/${server-name}.ear" />
+		<assemble-jar dynamoRoot="${atg-dynamo.dir}" serverName="${server-name}" destinationFile="${jboss-server-deployment.dir}/${server-name}/${server-name}.ear" 
+			dynamoModules="${module-list}" overwrite="true" jboss="true" layer="${server-layer}"/>
+	</target>
+
+
+	<!-- Define the hot swap task -->
+	<taskdef name="hotswap"
+			 classname="dak.ant.taskdefs.Hotswap"
+			 classpath="/home/oracle/eclipse/DemoAtgModule/external-libs/hotswap.jar"/>
+
+	<!-- Hot deploy target -->
+	<target name="hotswap" description="Hot swaps newly changed classes">
+
+		<!-- Set up a timestamp -->
+		<tstamp>
+			<format property="hotswap.tstamp" pattern="MM/dd/yyyy kk:mm:ss" />
+		</tstamp>
+
+		<!-- Compile -->
+		<antcall target="compile" />
+
+		<!-- Swap those that are after our timestamp -->
+		<hotswap verbose="true" port="8453">
+			<fileset dir="./${lib.dir}" includes="**/*.class">
+				<date datetime="${hotswap.tstamp}" pattern="MM/dd/yyyy kk:mm:ss" when="after" granularity="0"/>
+			</fileset>
+		</hotswap>
+
+	</target>
+
+
+</project>
