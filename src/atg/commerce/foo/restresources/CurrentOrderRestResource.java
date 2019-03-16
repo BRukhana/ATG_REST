@@ -17,7 +17,7 @@ public class CurrentOrderRestResource extends GenericService {
 	
 		
 	@GET
-	@Path("/logixal")
+	@Path("/forgotPassword")
 	@Consumes({"application/x-www-form-urlencoded"})
 	@Endpoint(id="/logixal#GET",filterId = "forgotPassword.forgotPasswordId",isSingular=true)
 	@ApiOperation("Forgot Password")

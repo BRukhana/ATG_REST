@@ -8,6 +8,16 @@ public class CustomPayload  extends GenericService{
 	String mErrorCode;
 	
 	String mMessage;
+	
+	String mContentItem;
+
+	public String getContentItem() {
+		return mContentItem;
+	}
+
+	public void setContentItem(String mContentItem) {
+		this.mContentItem = mContentItem;
+	}
 
 	public String getErrorCode() {
 		return mErrorCode;

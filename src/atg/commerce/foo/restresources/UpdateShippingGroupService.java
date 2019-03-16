@@ -6,6 +6,9 @@ import javax.ws.rs.*;
 import atg.commerce.CommerceException;
 
 import atg.nucleus.GenericService;
+import atg.service.jaxrs.DropletInvoker;
+import atg.service.jaxrs.OParam;
+import atg.service.jaxrs.Output;
 import atg.service.jaxrs.RestException;
 import atg.service.jaxrs.annotation.Endpoint;
 import atg.service.jaxrs.annotation.RestResource;
@@ -129,42 +132,40 @@ System.out.println("====================================================");
 	
 */	
 	
-	@GET
-	@Path("/testCode")
-	@Endpoint(id = "/testCode/#GET", isSingular = true,filterId = "sample-response")
-	@ApiOperation("Checkout the current order in the cart.")
-	public JSONObject testCode() throws RestException, CommerceException, ServletException {
-		
-		
-System.out.println("====================================================");
-		
-		CustomPayload payload= new CustomPayload();
-		payload.setErrorCode("500");
-	
-		payload.setMessage("Unable to process the requrest");
-//	Builder	builder = new RepresentationModel.Builder().state(payload).removeProperty("links").build();
+	@POST
+	@Path("/retrieveEndecaContent")
+	@Endpoint(id = "/retrieveEndecaContent/#POST", isSingular = true,filterId = "endeca-response",isValidatedByFramework=false)
+	@ApiOperation("Retrieve Content from endeca")
+	public JSONObject retrieveEndecaContent(JSONObject pInputJson) throws RestException, CommerceException, ServletException, JSONException {
+		DropletInvoker dropletInvoker = new  DropletInvoker("/atg/endeca/assembler/droplet/InvokeAssembler");
 
-	//System.out.println("removing Links");
-		System.out.println("Bhavin hotswap");
-		System.out.println("Bhavin hotswap : TEST2");
-
-		JSONObject json=new JSONObject();
-		try {
-			json.put("ErrorCode", "200");
-			
-			json.put("detailedMessage", "This is the test message");
-			
-			json.put("errorCode", "200");
-			
-			json.put("message", "TEST");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(pInputJson==null)
+		{
+			System.out.println("=========================Input Json is null===============");
 		}
-		
-		
-		return json;
+			
+		if(pInputJson.get("includePath")!=null) {
+			dropletInvoker.addInput("includePath", pInputJson.get("includePath"));
+		}else if(pInputJson.get("contentCollection")!=null) {
+			dropletInvoker.addInput("contentCollection", pInputJson.get("contentCollection"));
+		}
 	
+		OParam oParamOutput = dropletInvoker.addOParam("output");
+		oParamOutput.addOutput("contentItem", "contentItem");
+		dropletInvoker.invoke();
+		OParam oParamOutputResponse = dropletInvoker.getOParam("output");
+
+		Output contentItem = oParamOutputResponse.getOutput("contentItem");
+
+		System.out.println("contentItem  :::->>"+contentItem.getObject());
+
+		String jsonString=contentItem.getObject().toString();
+		
+		JSONObject obj=new JSONObject();
+		obj.put("contentItem", jsonString);
+		
+		return obj;
+
 	}
 	
 }

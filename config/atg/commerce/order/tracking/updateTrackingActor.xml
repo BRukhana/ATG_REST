@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actor-template default-chain-id="updateOrder"
+xsi:noNamespaceSchemaLocation="http://www.atg.com/xsds/ActorChain.xsd"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<actor-chain id="updateOrder" transaction="TX_SUPPORTS">
+  <form id="updateTrackingInfoFormHandler"
+      name="/com/training/UpdateTrackingInformationFormHandler"
+      handle="updateTrackingInformation" var="updateTrackingInfoFormHandler">
+    <input name="trackingId" value="123456789"/>
+    <input name="trackingUrl" value="http://ups.com"/>
+    <input name="errorUrl"
+        value="/model/atg/commerce/custsvc/order/
+        CommitOrderActor/updateOrder-error"/>
+    <input name="successUrl"
+        value="/model/com/training/UpdateTrackingActor/updateOrder-success"/>
+  </form>
+</actor-chain>
+<actor-chain id="update-success" transaction="TX_SUPPORTS">
+          <output name="response" value="true" />
+    </actor-chain>
+
+     <actor-chain id="update-error" transaction="TX_SUPPORTS">
+           <output name="response" value="false" />
+    </actor-chain>
+
+</actor-template>

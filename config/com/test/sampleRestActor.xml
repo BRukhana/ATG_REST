@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actor-template default-chain-id="findAddress"
+  xsi:noNamespaceSchemaLocation="http://www.atg.com/xsds/actorChain_1.0.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <actor-chain id="findAddress" transaction="TX_SUPPORTS">
+     <component id="rc" name="/com/test/RestComponent" component-var="rc" method="findAddress"
+     method-return-var="address">
+          <input name="id" value="${param.id}" class-name="java.lang.String"/>
+        <output id="address" name="address" value="${address}" filter-id="summary"/>
+    </component>
+  </actor-chain>
+  <actor-chain id="findAddress1" transaction="TX_SUPPORTS">
+     <component id="rc" name="/com/test/RestComponent" component-var="rc" method="findAddress"
+     method-return-var="address">
+          <input name="id" value="${param.id}" class-name="java.lang.String"/>
+        <output id="address" name="address" value="${address}" filter-id="detailed"/>
+    </component>
+  </actor-chain>
+</actor-template>
+
+

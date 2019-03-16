@@ -1,0 +1,15 @@
+<bean-filtering xml-combine="append">
+ <bean default-filter="detailed" name="com.rest.component.Address" xml-combine="append">
+     <filter id="summary">
+         <property name="city"/>
+         <property name="state"/>
+  </filter>
+     <filter id="detailed">
+       <property name="firstName"/>
+   <property name="lastName"/>
+         <property name="city"/>
+         <property name="state"/>
+         <property name="zip"/>
+  </filter>
+ </bean>
+</bean-filtering>

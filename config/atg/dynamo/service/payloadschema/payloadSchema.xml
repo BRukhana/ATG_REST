@@ -22,6 +22,10 @@ Specifier 1.0//EN" "http://www.atg.com/dtds/payloadschema/payloadschema_1.0.dtd"
 
 
 
+  	<schema id="endeca-response" writable="false">
+		<bean class="atg.commerce.foo.restresources.CustomPayload" />
+		<property name="contentItem"/>
+	</schema>
 
 
 
