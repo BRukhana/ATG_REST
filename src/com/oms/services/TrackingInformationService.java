@@ -10,6 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import atg.commerce.CommerceException;
 import atg.nucleus.GenericService;
+import atg.service.jaxrs.DropletInvoker;
+import atg.service.jaxrs.OParam;
+import atg.service.jaxrs.Output;
 import atg.service.jaxrs.RepresentationModel;
 import atg.service.jaxrs.RepresentationModel.Builder;
 import atg.service.jaxrs.RestException;
@@ -17,6 +20,7 @@ import atg.service.jaxrs.annotation.Endpoint;
 import atg.service.jaxrs.annotation.RestResource;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import oracle.net.aso.p;
 
 @RestResource(id = "TrackingInformationService")
 @Path("/trackingInfo")
@@ -53,7 +57,7 @@ public class TrackingInformationService extends GenericService{
 	}
 	
 	
-
+/*
 	@POST
 	@Produces("application/json")
 	@Consumes("application/json")
@@ -97,5 +101,68 @@ public class TrackingInformationService extends GenericService{
 		}
 
 	}	
+*/
+	
+	
+	@POST
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Path("/getEndecaInfo")
+	@Endpoint(
+			id = "/endeca/getEndecaInfo/#POST",
+			isSingular = true,
+			isValidatedByFramework=false,
+			filterId = "endeca-response"
+	)
+	@ApiOperation("fetch endeca info")
+	public JSONObject updateTrackingInformation(JSONObject pInputJson) throws RestException, CommerceException {
+		{
+			try {
 
+		
+				DropletInvoker dropletInvoker = new  DropletInvoker("/atg/endeca/assembler/droplet/InvokeAssembler");
+
+				if(pInputJson==null)
+				{
+					System.out.println("=========================Input Json is null===============");
+				}
+					
+				if(pInputJson.get("includePath")!=null) {
+					System.out.println("Include Path ::->"+pInputJson.get("includePath"));
+					dropletInvoker.addInput("includePath", pInputJson.get("includePath"));
+				}else if(pInputJson.get("contentCollection")!=null) {
+				
+					System.out.println("Include Path ::->"+pInputJson.get("contentCollection"));
+					
+					dropletInvoker.addInput("contentCollection", pInputJson.get("contentCollection"));
+				}
+			
+				OParam oParamOutput = dropletInvoker.addOParam("output");
+				oParamOutput.addOutput("contentItem", "contentItem");
+				dropletInvoker.invoke();
+				OParam oParamOutputResponse = dropletInvoker.getOParam("output");
+
+				Output contentItem = oParamOutputResponse.getOutput("contentItem");
+
+				System.out.println("contentItem  :::->>"+contentItem.getObject());
+
+				String jsonString=contentItem.getObject().toString();
+				
+				JSONObject obj=new JSONObject();
+				obj.put("contentItem", jsonString);
+				
+				return obj;
+
+			} catch (JSONException je) {
+
+				vlogError("Error in processing request",je );
+
+			}
+
+			return null;
+		}
+
+	}		
+	
+	
 }

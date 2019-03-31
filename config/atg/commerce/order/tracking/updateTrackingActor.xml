@@ -10,9 +10,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <input name="trackingUrl" value="http://ups.com"/>
     <input name="errorUrl"
         value="/model/atg/commerce/custsvc/order/
-        CommitOrderActor/updateOrder-error"/>
+        CommitOrderActor/update-error"/>
     <input name="successUrl"
-        value="/model/com/training/UpdateTrackingActor/updateOrder-success"/>
+        value="/model/com/training/UpdateTrackingActor/update-success"/>
   </form>
 </actor-chain>
 <actor-chain id="update-success" transaction="TX_SUPPORTS">

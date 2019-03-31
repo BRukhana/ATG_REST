@@ -164,6 +164,7 @@ System.out.println("====================================================");
 		JSONObject obj=new JSONObject();
 		obj.put("contentItem", jsonString);
 		
+		System.out.println("obj :::->"+obj);
 		return obj;
 
 	}

@@ -1,11 +1,16 @@
 package com.endeca.InvokeAssembler;
 
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+
 import org.json.JSONObject;
+
 import atg.commerce.CommerceException;
+import atg.json.JSONException;
 import atg.nucleus.GenericService;
 import atg.service.jaxrs.DropletInvoker;
 import atg.service.jaxrs.OParam;
@@ -19,6 +24,68 @@ import io.swagger.annotations.ApiOperation;
 @RestResource(id = "InvokeAssemblerRestResource")
 @Path("/endeca")
 public class InvokeAssemblerRestResource extends GenericService{
+	
+	
+@GET
+@Path("/endecaRest")
+@Consumes({"application/x-www-form-urlencoded"})
+@Endpoint(id="/logixal#GET",filterId = "forgotPassword.forgotPasswordId",isSingular=true)
+@ApiOperation("Forgot Password")
+	public String endecaTest() throws RestException, ServletException {
+	
+	return "test";
+	
+}
+	
+	
+	@POST
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Path("/fetchEndecaData")
+	@Endpoint(
+			id = "/endeca/fetchDataFromEndeca/#POST",
+			isSingular = true,
+			isValidatedByFramework=false,
+			filterId = "tracking-update"
+	)
+	@ApiOperation("fetch data from endeca")
+	public JSONObject updateTrackingInformation(JSONObject pInputJson) throws RestException, CommerceException {
+		{
+			
+			System.out.println("Input JSON"+pInputJson);
+			JSONObject resObj=new JSONObject();
+			try {
+
+				if(pInputJson==null) {
+
+					resObj.put("errorCode", "500");
+					resObj.put("errorMsg", "Input Json null");
+
+				}else {
+
+					String trackingNo=(String) pInputJson.get("trackingNo");
+					String trackingUrl=pInputJson.getString("trackingUrl");
+
+					resObj.put("trackNo", trackingNo);
+					resObj.put("trackUrl", trackingUrl);
+					resObj.put("updateStatus", "Data Updated Successfully");
+
+					return 	resObj;	
+
+				}
+			}
+			 catch (org.json.JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+	}	
+
+
+	
 	
 	
 
