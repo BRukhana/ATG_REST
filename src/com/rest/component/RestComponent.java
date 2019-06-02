@@ -14,7 +14,6 @@ public class RestComponent extends GenericService{
 		
 		
 		
-		//return null;
 		
 	}
 	

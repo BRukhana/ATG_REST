@@ -17,8 +17,6 @@ import io.swagger.annotations.ApiOperation;
 public class EndecaRestResource {
 	
 	
-	
-	
 	@POST
 	@Produces("application/json")
 	@Consumes("application/json")
@@ -34,10 +32,6 @@ public class EndecaRestResource {
 
 		JSONObject obj=new JSONObject();
         System.out.println("This is inside post "+pInputJson);
-		//RepositoryItem profile = this.getProfile();
-		//Map inputJson = (Map)RestUtils.getRestUtils().getResourceUpdateInfo().getUpdates();
-		//String couponId = (String)inputJson.get("id");
-		//this.mClaimableManager.claimCoupon(profile.getRepositoryId(), couponId);
 		return obj;
 	}
 	
