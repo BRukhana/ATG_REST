@@ -12,4 +12,15 @@
          <property name="zip"/>
   </filter>
  </bean>
-</bean-filtering>
+ 
+ <bean default-filter="order-detailed" name="atg.commerce.order.Order" xml-combine="append">
+     <filter id="order-detailed">
+         <property name="profileId"/>
+         <property name="state"/>
+          <property name="id"/>
+          <property name="submittedDate"/>
+          
+  </filter>
+    </bean>
+ 
+ </bean-filtering>

@@ -13,8 +13,6 @@ public class RestComponent extends GenericService{
 		
 		
 		
-		
-		
 	}
 	
 	

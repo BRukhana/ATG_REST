@@ -9,8 +9,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <input name="trackingId" value="123456789"/>
     <input name="trackingUrl" value="http://ups.com"/>
     <input name="errorUrl"
-        value="/model/atg/commerce/custsvc/order/
-        CommitOrderActor/update-error"/>
+        value="/model/atg/commerce/custsvc/order/CommitOrderActor/update-error"/>
     <input name="successUrl"
         value="/model/com/training/UpdateTrackingActor/update-success"/>
   </form>

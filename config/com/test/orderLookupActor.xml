@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actor-template default-chain-id="getOrderInfo"
+  xsi:noNamespaceSchemaLocation="http://www.atg.com/xsds/actorChain_1.0.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <actor-chain id="getOrderInfo" transaction="TX_SUPPORTS"> 
+  
+<droplet var="orderLookup" name="/atg/commerce/order/OrderLookup/" id="orderLookup">
+      <input name="orderId" value="${param.id}"/>
+      <oparam name="output">
+        <output name="orderLookupId" id="orderLookupId" value="${orderLookup.result}"  filter-id="order-detailed"/>
+      </oparam>
+    </droplet> 
+ </actor-chain> 
+ 
+    </actor-template>
+    
