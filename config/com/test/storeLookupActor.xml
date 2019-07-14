@@ -4,8 +4,15 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <actor-chain id="getOrderInfo" transaction="TX_SUPPORTS"> 
   
+   <component id="rc" name="/com/training/LocationLookupService" component-var="rc" method="retrieveStoreIdFromLocation"
+     method-return-var="address">
+          <input name="locationId" value="${param.id}" class-name="java.lang.String"/>
+ <set-var name="address" value="${address}" />
+    </component>
+  
+  
 <droplet var="storeLookup" name="/com/test/StoreLookupCustom" id="storeLookup">
-      <input name="storeId" value="${param.id}"/>
+      <input name="storeId" value="${address}"/>
       <oparam name="output">
         <output name="storeLookup" id="storeLookup" value="${storeLookup.element}"/>
       </oparam>
